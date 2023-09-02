@@ -5,32 +5,38 @@ let myBulletsContainer = document.querySelector(".blogs .dots-blog")
 let blogContainer = document.querySelector(".cards-blog")
 let prevPoint;
 let Differ;
+let x =-1;
 blogContainer.addEventListener("touchstart", (e) => {
   prevPoint = e.touches[0].pageX;
+  x =-1
   console.log(prevPoint)
 })
 blogContainer.addEventListener("touchmove", (e) => {
   Differ = prevPoint - (e.touches[0].pageX);
-  if (Differ > 0/*  && prevPoint - Differ == 200 */) {
-    for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
-      if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
-        if (myBulletsContainer.children[index + 1]) {
-          myBulletsContainer.children[index + 1].click();
-          break;
+  while (x<0) {
+    x++;
+    console.log("x="+x)
+    if (Differ > 0/*  && prevPoint - Differ == 200 */) {
+      for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
+        if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
+          if (myBulletsContainer.children[index + 1]) {
+            myBulletsContainer.children[index + 1].click();
+            break;
+          }
+        }
+      }
+      console.log(prevPoint - Differ)
+    } else {
+      for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
+        if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
+          if (myBulletsContainer.children[index - 1]) {
+            myBulletsContainer.children[index - 1].click();
+            break;
+          }
         }
       }
     }
-    console.log(prevPoint - Differ)
-  } else {
-    for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
-      if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
-        if (myBulletsContainer.children[index - 1]) {
-          myBulletsContainer.children[index - 1].click();
-          break;
-        }
-      }
-    }
-  }
+  }while (x<0);
 })
 blogContainer.addEventListener("mousemove", (e) => {
   x = e.offsetX;
