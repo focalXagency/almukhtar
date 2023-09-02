@@ -11,7 +11,7 @@ blogContainer.addEventListener("touchstart", (e) => {
 })
 blogContainer.addEventListener("touchmove", (e) => {
   Differ = prevPoint - (e.touches[0].pageX);
-  if (Differ > 0 && prevPoint - Differ == 200) {
+  if (Differ > 0/*  && prevPoint - Differ == 200 */) {
     for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
       if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
         if (myBulletsContainer.children[index + 1]) {
@@ -22,16 +22,13 @@ blogContainer.addEventListener("touchmove", (e) => {
     }
     console.log(prevPoint - Differ)
   } else {
-    if (prevPoint - Differ == 200) {
-      for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
-        if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
-          if (myBulletsContainer.children[index - 1]) {
-            myBulletsContainer.children[index - 1].click();
-            break;
-          }
+    for (let index = 0; index < Array.from(myBulletsContainer.children).length; index++) {
+      if (myBulletsContainer.children[index].classList == "dot-bl active-dot-bl") {
+        if (myBulletsContainer.children[index - 1]) {
+          myBulletsContainer.children[index - 1].click();
+          break;
         }
       }
-      console.log(prevPoint - Differ)
     }
   }
 })
